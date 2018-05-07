@@ -503,9 +503,7 @@ export default class InputRange extends React.Component {
       return;
     }
 
-    if (this.startValue !== this.props.value) {
-      this.props.onChangeComplete(this.props.value);
-    }
+    this.props.onChangeComplete(this.props.value);
 
     this.startValue = null;
   }

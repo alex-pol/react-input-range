@@ -347,29 +347,7 @@ describe('InputRange', () => {
     component.detach();
   });
 
-  it('does not notify the parent component if there is no change', () => {
-    const onChange = jasmine.createSpy('onChange').and.callFake(value => component.setProps({ value }));
-    const onChangeComplete = jasmine.createSpy('onChangeComplete');
-    const jsx = (
-      <InputRange
-        maxValue={20}
-        minValue={0}
-        value={{ min: 2, max: 10 }}
-        onChange={onChange}
-        onChangeComplete={onChangeComplete}
-      />
-    );
-    const component = mount(jsx, { attachTo: container });
-    const slider = component.find(`Slider [onMouseDown]`).first();
 
-    slider.simulate('mouseDown', { clientX: 50, clientY: 50 });
-    document.dispatchEvent(new MouseEvent('mousemove', { clientX: 51, clientY: 50 }));
-    document.dispatchEvent(new MouseEvent('mouseup', { clientX: 51, clientY: 50 }));
-    expect(onChange).not.toHaveBeenCalled();
-    expect(onChangeComplete).not.toHaveBeenCalled();
-
-    component.detach();
-  });
 
   it('displays the current value as a label', () => {
     const jsx = (
